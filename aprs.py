@@ -1,16 +1,20 @@
+import os
 import sys
+from pathlib import Path
 
 import requests
-import os
-
-from pathlib import Path
 
 apiKey = os.environ.get('API_KEY')
 stationId = os.environ.get('STATION_ID')
+comment = os.environ.get('COMMENT')
 
 if apiKey is None or stationId is None:
     print("API_KEY *and* STATION_ID should be set")
     sys.exit(1)
+
+# TODO: validate the comment is max n chars
+if comment is None:
+    comment = ''
 
 url = "https://api.weather.com/v2/pws/observations/current"
 url += "?stationId=%s&format=json&units=m&apiKey=%s" % (stationId, apiKey)
@@ -51,12 +55,11 @@ humidity = obs['humidity']
 baroPres = str(round(obs['metric']['pressure'], 1)).replace('.', '')
 
 timeLocal = obs['obsTimeLocal']
-weatherData = f"{winDir}/{windSpeedMph}g{windGustMph}t{tempF}r{rainPad}p{rainTPad}h{humidity}b{baroPres}LEZG"
+weatherData = f"{winDir}/{windSpeedMph}g{windGustMph}t{tempF}r{rainPad}p{rainTPad}h{humidity}b{baroPres}{comment}"
 
 # print for fast feedback
 print(timeLocal)
-print(winDir, '/', windSpeedMph, 'g', windGustMph, 't', tempF, 'r', rainPad,
-      'p', rainTPad, 'h', humidity, 'b', baroPres, 'LEZG', sep='')
+print(weatherData)
 
 # last but not least, write the file
 path = Path('wxcurrent.txt')
