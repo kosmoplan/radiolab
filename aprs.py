@@ -58,7 +58,7 @@ def process(data, comment):
     rain_t = rain_data['total'] * 0.0039370
     rain_t_pad = str(rain_t).replace('.', '').rjust(3, '0')[0: 3]
     # rain last 5m in mm - convert to inches, get rid of 0s, padding, first 3
-    rain_l5 = rain_data['total'] * 0.0039370
+    rain_l5 = rain_data['last_5m'] * 0.0039370
     rain_l5m_pad = str(rain_l5).replace('.', '').rjust(3, '0')[0: 3]
 
     # temp in deg C - convert to F, round and add padding
