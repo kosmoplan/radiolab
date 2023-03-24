@@ -9,4 +9,4 @@ comment = os.environ.get('COMMENT')
 
 while True:
     run(apiKey, stationId, comment)
-    time.sleep(5)
+    time.sleep(600)
