@@ -5,14 +5,6 @@ import requests
 
 
 def run(api_key, station_id, comment):
-    if api_key is None or station_id is None:
-        print("API_KEY *and* STATION_ID should be set")
-        sys.exit(1)
-
-    # TODO: validate the comment is max n chars
-    #   I have no idea what is the limit at this point
-    if comment is None:
-        comment = ''
 
     url = "https://api.weather.com/v2/pws/observations/all/1day"
     url += "?stationId=%s&format=json&units=m&apiKey=%s" % (
