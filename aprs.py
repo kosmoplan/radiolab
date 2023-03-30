@@ -32,7 +32,7 @@ def process(data, comment):
     obs = data['observations'][last]
 
     # wind direction in deg
-    win_dir = obs['winddirAvg']
+    win_dir = str(obs['winddirAvg']).rjust(3, '0')
     # wind speed in km/h - round to integer and add padding
     wind_speed = obs['metric']['windspeedAvg']
     wind_speed_mph = str(round(wind_speed / 1.609344)).rjust(3, '0')
